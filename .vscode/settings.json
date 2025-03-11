@@ -1,3 +1,5 @@
 {
-	"cSpell.words": ["Hydrafacial's"]
+	"cSpell.words": ["Hydrafacial's"],
+	"prettier.plugins": ["prettier-plugin-tailwindcss"]
+
 }
