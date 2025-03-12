@@ -1,12 +1,52 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
+import { cn } from '@/lib/utils';
 import { ArrowDown, XIcon } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export const ChatButton = () => {
   const [showLabel, setShowLabel] = useState<boolean>(true);
+  const [chatInitialized, setChatInitialized] = useState<boolean>(false);
+
+  useEffect(() => {
+    // Load the Middo chat widget script
+    const chatWidgetURL = process.env.NEXT_PUBLIC_CHAT_WIDGET_URL;
+    const helpDeskURL = process.env.NEXT_PUBLIC_HELP_DESK_URL;
+    if (!chatWidgetURL || !helpDeskURL) {
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = chatWidgetURL;
+    script.async = true;
+    script.onload = () => {
+      // Initialize the chat widget once the script is loaded
+      if (window.ChatWidget && !chatInitialized) {
+        window.ChatWidget.init(helpDeskURL, 'default');
+        setChatInitialized(true);
+      }
+    };
+    document.body.appendChild(script);
+
+    // Cleanup function to remove the script when component unmounts
+    return () => {
+      if (script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
+    };
+  }, [chatInitialized]);
+
+  const handleChatButtonClick = () => {
+    if (window.ChatWidget) {
+      window.ChatWidget.open();
+    }
+  };
   return (
-    <div className="fixed right-5 bottom-5 flex flex-col items-end gap-3">
+    <div
+      className={cn(
+        'fixed right-6 bottom-24 flex flex-col items-end gap-3',
+        !chatInitialized && 'bottom-6',
+      )}
+    >
       {showLabel && (
         <div className="relative rounded-2xl border border-black/10 bg-white px-3 py-2 shadow-lg">
           <div className="flex items-center gap-1">
@@ -24,9 +64,14 @@ export const ChatButton = () => {
           </button>
         </div>
       )}
-      <button className="rounded-full border border-black/10 bg-white/50 p-3 shadow-lg backdrop-blur-lg">
-        <img src="/chat-buble.svg" alt="" className="size-12" />
-      </button>
+      {!chatInitialized && (
+        <button
+          onClick={handleChatButtonClick}
+          className="rounded-full border border-black/10 bg-white/50 p-3 shadow-lg backdrop-blur-lg"
+        >
+          <img src="/chat-buble.svg" alt="" className="size-12" />
+        </button>
+      )}
     </div>
   );
 };
