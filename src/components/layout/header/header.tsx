@@ -79,7 +79,7 @@ export const Header = () => {
               <DrawerTitle>
                 {' '}
                 <Link href="/" className="shrink-0">
-                  <Image src="/logo.svg" alt="logo" />
+                  <img src="/logo.svg" alt="logo" />
                 </Link>
               </DrawerTitle>
             </DrawerHeader>

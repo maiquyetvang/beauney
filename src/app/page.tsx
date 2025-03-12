@@ -25,206 +25,19 @@ import {
 import { cn } from '@/lib/utils';
 import CarouselHomePage from '@/components/carousel';
 import Autoplay from 'embla-carousel-autoplay';
-import { specialItems } from '@/components/layout/header/header-desktop-menu';
 
-const locationItems = [
-  {
-    title: 'Cheongna',
-    address: '594, Jungbong-daero, Seo-gu, Incheon, Republic of Korea',
-    description: `Cheongna is located near Incheon Airport, <span class="mr-1 ml-1 text-primary-500">just a 30-minute drive</span> from the airport`,
-  },
-  {
-    title: 'Yongsan',
-    address:
-      '2nd Floor, Unit 8, E Mall, Harrington Square, 17 Seobinggo-ro, Yongsan-gu, Seoul, South Korea',
-    description: `Yongsan is located near Incheon Airport, just a 1-hour drive from the airport`,
-  },
-  {
-    title: 'Seoul National University',
-    address:
-      '2nd Floor, Human Dermatology Clinic Seoul National University Branch, 184-2, Gwanak-gu, Seoul, South Korea',
-    description: `Seoul National University is located near Incheon Airport, just a 1-hour drive from the airport.`,
-  },
-  {
-    title: 'Siheung',
-    address: '2nd Floor, 186 Gwanak-ro, Gwanak-gu, Seoul, South Korea',
-    description: `Siheung is located near Incheon Airport, just a 40-minute drive from the airport.`,
-  },
-  {
-    title: 'Benjamin',
-    address: '6th Floor, 138 Dosan-daero, Gangnam-gu, Seoul, South Korea',
-    description: `Benjamin is located near Incheon Airport, just a 1-hour drive from the airport.`,
-  },
-  {
-    title: 'Pyeongtaek',
-    address:
-      '10th Floor, Centum Sky (Starbucks Building), 13 Jungang 2-ro, Pyeongtaek-si, Gyeonggi-do, South Korea',
-    description: `Pyeongtaek is located near Incheon Airport, just a 1.5-hour drive from the airport.`,
-  },
-  {
-    title: 'Gangseo',
-    address: '261 Gonghang-daero, Gangseo-gu, Seoul, South Korea',
-    description: `Gangseo is located near Incheon Airport, just a 40-minute drive from the airport.`,
-  },
-  {
-    title: 'Artin',
-    address:
-      '1st Floor, Dongyoung Culture Center, 772 Yeoksam-dong, Gangnam-gu, Seoul, South Korea',
-    description: `Artin is located near Incheon Airport, just a 1.5-hour drive from the airport.`,
-  },
-  {
-    title: 'Gwangjang',
-    address:
-      '2nd Floor, Jinnex Odyssey, 502 Achasan-ro, Gwangjin-gu, Seoul, South Korea',
-    description: `Artin is located near Incheon Airport, just a 1.5-hour drive from the airport.`,
-  },
-  {
-    title: 'Gwangmyeong',
-    address:
-      '3rd Floor, Unit 301, Dain Building, 24 Cheolsan-ro, Gwangmyeong-si, Gyeonggi-do, South Korea',
-    description: `Artin is located near Incheon Airport, just a 1-hour drive from the airport.`,
-  },
-  {
-    title: 'Morgan',
-    address:
-      '5th Floor, JB Miso Building, 841 Nonhyeon-ro, Sinsa-dong, Gangnam-gu, Seoul, South Korea',
-    description: `Artin is located near Incheon Airport, just a 1.5-hour drive from the airport.`,
-  },
-  {
-    title: 'Songdo',
-    address:
-      '5th Floor, Office Building, IBS Tower, 263 Central-ro, Yeonsu-gu, Incheon, South Korea',
-    description: `Songdo is located near Incheon Airport, just a 30-minute drive from the airport.`,
-  },
-  {
-    title: 'Pohang',
-    address:
-      '3rd Floor, Unit 301, Dain Building, 24 Cheolsan-ro, Gwangmyeong-si, Gyeonggi-do, South Korea',
-    description: `Artin is located near Incheon Airport, just a 1-hour drive from the airport.`,
-  },
-];
+import { locationItems } from '@/constants/locationItems';
+import { specialItems } from '@/constants/specialItems';
+import { kcosmeticItems } from '@/constants/kcosmeticItems';
+import { koreanCosmeticItems } from '@/constants/koreanCosmeticItems';
+import { equipmentItems } from '@/constants/equipmentItems';
 
-const kcosmeticitem = [
-  {
-    title: 'Skin Whitening Treatments',
-    image: 'img/k-cosmetic/SWT.png',
-    description: 'Achieve a brighter and more even skin tone.',
-    url: '/news/skin-whitening-treatment',
-  },
-  {
-    title: 'Lifting',
-    image: 'img/k-cosmetic/LIFTING.png',
-    description: 'Non-surgical solutions for youthful, firmer skin.',
-    url: '/news/lifting',
-  },
-  {
-    title: 'Botox',
-    image: 'img/k-cosmetic/BOTOX.png',
-    description:
-      'Targeted solutions for pigmentation, acne scars, and skin rejuvenation.',
-    url: '/news/botox',
-  },
-  {
-    title: 'Filler',
-    image: 'img/k-cosmetic/FILLER.png',
-    description: 'Smooth fine lines and wrinkles for a youthful appearance.',
-    url: '/news/filler',
-  },
-  {
-    title: 'Fillers',
-    image: 'img/k-cosmetic/Fillers.png',
-    description: 'Restore volume and contour your facial features.',
-    url: '/news/fillers',
-  },
-  {
-    title: 'Hair Transplant',
-    image: 'img/k-cosmetic/Hair Transplant.png',
-    description: 'Advanced techniques to restore natural hair growth.',
-    url: '/news/hair-transplant',
-  },
-];
-
-const koreanCosmeticItem = [
-  {
-    title: 'Synergy Soothing Ampoule 35ml',
-    image: 'img/korean-cosmetic/Synergy Soothing Ampoule 35ml.png',
-    description:
-      'A-skin’s synergy solution helps to recharge moisture energy while keeping the skin hydrated for a longer time.',
-    url: 'product/synergy-soothing-ampoule-35',
-  },
-  {
-    title: 'ASKIN Revitalize MGF Plus Cream 50ml ',
-    image: 'img/korean-cosmetic/ASKIN Revitalize MGF Plus Cream 50ml .png',
-    description: 'Daily Skin Recovery Cream with MGF Complex',
-    url: 'product/askin-revitalize-mgf-plus-cream-50',
-  },
-  {
-    title: 'Newmela Cream 30g',
-    image: 'img/korean-cosmetic/Newmela-Cream-30g.png',
-    description:
-      'A-Skins Synergy Solution helps recharge moisture energy while keeping your skin hydrated for a long time.',
-    url: 'product/newmela-cream-30',
-  },
-  {
-    title: 'ASKIN Synergy Whitening Ampoule 35ml',
-    image: 'img/korean-cosmetic/ASKIN-synergy-whitening-ampoule-35ml.png',
-    description:
-      'Post Rays Line reinforces and protects skin that has undergone professional skincare treatment.  It is specially formulated to strengthen and safeguard your skin internally before treatment and to soothe and restore it after treatment.',
-    url: 'akin-synergy-whitening-ampoule-35',
-  },
-  {
-    title: 'ASKIN Synergy Repair Ampoule 35ml',
-    image: 'img/korean-cosmetic/ASKIN-synergy-repair-ampoule-35ml.png',
-    description:
-      'Post Rays Line reinforces and protects skin that has undergone professional skincare treatment.  It is specially formulated to strengthen and safeguard your skin internally before treatment and to soothe and restore it after treatment.',
-    url: 'product/askin-synergy-repair-ampoule-35',
-  },
-];
 export type EquipmentItemType = {
   title: string;
   image: string;
   description: string;
   fullDescription: string;
 };
-const equiptmentitem: EquipmentItemType[] = [
-  {
-    title: 'Thermage FLX',
-    image: 'img/equipment/thermageflx.png',
-    description: 'Skin texture, Skin tone improvement Anti-aging',
-    fullDescription:
-      'It is a procedure that uses high-frequency energy instead of lasers to contract and regenerate sagging collagen, the main cause of skin aging.\n It is excellent for improving skin elasticity, tightening, and overall skin enhancement.\n The 4th generation Thermage features a tip that is 33% larger than previous models, reducing procedure time by 25%.',
-  },
-  {
-    title: 'Skin aura',
-    image: '/img/equipment/SkinAura.png',
-    description: 'Lifting, Collagen Production Skin Texture',
-    fullDescription:
-      'Skin Aura is an advanced high-intensity focused ultrasound (HIFU) device by Wellcomet, specifically designed to focus on collagen regeneration.\nGoing beyond the limitations of traditional lifting devices, it targets the aging and regeneration of subcutaneous fat layers.\nThis procedure minimizes daily discomfort and pain, helping to create firm and youthful skin.',
-  },
-
-  {
-    title: 'Ulthera',
-    image: '/img/equipment/ulthera.png',
-    description: 'Deep Wrinkles, Lifting Elasticity',
-    fullDescription:
-      'Skin Aura is an advanced high-intensity focused ultrasound (HIFU) device by Wellcomet, specifically designed to focus on collagen regeneration.\n Going beyond the limitations of traditional lifting devices, it targets the aging and regeneration of subcutaneous fat layers.\n This procedure minimizes daily discomfort and pain, helping to create firm and youthful skin.',
-  },
-  {
-    title: 'Vbeam-Perfecta',
-    image: '/img/equipment/VbeamPerfecta.png',
-    description: 'Acne, Redness, Hemangioma Rosacea, Scar',
-    fullDescription:
-      'The Erbium Laser combines the advantages of CO2 lasers, making it an ideal laser for deep wrinkles, scars, and resurfacing treatments.\n It is FDA-approved in the U.S., ensuring safety. This is the worlds first laser using YSGG technology with a 2790nm wavelength, providing an advanced skin treatment solution.\n It is highly effective in treating wrinkles around the eyes and mouth while also helping improve pores, elasticity, skin texture, and smoothness.',
-  },
-
-  {
-    title: 'Pearl Laser',
-    image: '/img/equipment/PearlLaser.png',
-    description: 'Deep Wrinkles, Wrinkles, Skin Tone Improvement',
-    fullDescription:
-      "The Erbium Laser combines the advantages of CO2 lasers, making it an ideal laser for deep wrinkles, scars, and resurfacing treatments. It is FDA-approved in the U.S., ensuring safety.\nThis is the world's first laser using YSGG technology with a 2790nm wavelength, providing an advanced skin treatment solution.\nIt is highly effective in treating wrinkles around the eyes and mouth while also helping improve pores, elasticity, skin texture, and smoothness.",
-  },
-];
 
 export default function Home() {
   const [selectedLocation, setSelectedLocation] = useState(locationItems[0]);
@@ -332,7 +145,7 @@ export default function Home() {
         </p>
         <h3 className="text-primary-500 mb-10 lg:mb-20">Skin Health News</h3>
         <div className="flex w-full grid-flow-row grid-cols-3 flex-col gap-10 lg:grid lg:gap-20">
-          {kcosmeticitem.map((item) => (
+          {kcosmeticItems.map((item) => (
             <div
               className="transition-all ease-in-out lg:hover:shadow-lg"
               key={item.image}
@@ -395,7 +208,7 @@ export default function Home() {
           backed by expert research for safe and effective results.
         </p>
         <div className="flex grid-flow-row grid-cols-3 flex-col items-stretch gap-10 overflow-hidden lg:grid lg:gap-20">
-          {koreanCosmeticItem.map((item) => (
+          {koreanCosmeticItems.map((item) => (
             <div key={item.image}>
               <KoreanCosmeticItem
                 title={item.title}
@@ -475,12 +288,12 @@ export default function Home() {
           continuous investment and upgrades in laser technology and equipment.
         </p>
         <div className="flex w-full grid-flow-row grid-cols-3 flex-col gap-10 lg:grid lg:gap-20">
-          {equiptmentitem.slice(0, 2).map((item) => (
+          {equipmentItems.slice(0, 2).map((item) => (
             <div key={item.title}>
               <EquipmentItem item={item} />
             </div>
           ))}
-          {equiptmentitem.slice(3).map((item) => (
+          {equipmentItems.slice(3).map((item) => (
             <div key={item.description}>
               <EquipmentItem item={item} />
             </div>
