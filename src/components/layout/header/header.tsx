@@ -12,18 +12,19 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from '@/components/ui/drawer';
+import { ROUTES } from '@/constants/routes';
 import { useScroll } from '@/hooks/use-scroll';
 import { cn } from '@/lib/utils';
 import { Globe, Instagram, Mail, MenuIcon } from 'lucide-react';
 import Link from 'next/link';
 
 const headerMenuItem = [
-  { title: 'HOME', url: '/' },
-  { title: 'ABOUT US', url: '/about' },
-  { title: 'TREATMENT', url: '/treatment' },
-  { title: 'PRODUCT', url: '/product' },
-  { title: 'NEWS', url: '/news' },
-  { title: 'CONTACT', url: '/contact' },
+  { title: 'HOME', url: ROUTES.HOME },
+  { title: 'ABOUT US', url: ROUTES.ABOUT_US },
+  { title: 'TREATMENT', url: ROUTES.TREATMENT },
+  { title: 'PRODUCT', url: ROUTES.PRODUCT },
+  { title: 'NEWS', url: ROUTES.NEWS },
+  { title: 'CONTACT', url: ROUTES.CONTACT },
 ];
 
 export const Header = () => {
