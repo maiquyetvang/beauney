@@ -15,7 +15,6 @@ import {
 import { useScroll } from '@/hooks/use-scroll';
 import { cn } from '@/lib/utils';
 import { Globe, Instagram, Mail, MenuIcon } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 
 const headerMenuItem = [
@@ -79,7 +78,7 @@ export const Header = () => {
               <DrawerTitle>
                 {' '}
                 <Link href="/" className="shrink-0">
-                  <Image src="/logo.svg" alt="logo" />
+                  <img src="/logo.svg" alt="logo" />
                 </Link>
               </DrawerTitle>
             </DrawerHeader>

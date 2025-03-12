@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { HomeIcon } from 'lucide-react';
 
-import { submitToGoogleSheets } from '@/app/actions/submit-form';
+import { submitToGoogleSheets } from '@/actions/submit-form';
 import {
   Form,
   FormControl,
@@ -19,6 +19,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { consultField } from './constants';
 const formSchema = z.object({
   consultationFields: z.array(z.string()).min(1, {
     message: 'Please select at least one consultation field',
@@ -36,16 +37,6 @@ const formSchema = z.object({
     message: 'Message must be at least 10 characters',
   }),
 });
-
-const consultField = [
-  { field: 'Skin Whitening', id: 'skinwhitening' },
-  { field: 'Botox', id: 'botox' },
-  { field: 'Filler', id: 'filler' },
-  { field: 'Ultherapy & Thermage Dual Lifting', id: 'ultherapy' },
-  { field: 'Skin booster', id: 'skinbooster' },
-  { field: 'Hair transplant', id: 'hairtransplant' },
-  { field: 'Other ', id: 'other' },
-];
 
 export default function Home() {
   const [isSubmitting, setIsSubmitting] = useState(false);
