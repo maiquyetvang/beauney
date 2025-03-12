@@ -32,12 +32,6 @@ import { kcosmeticItems } from '@/constants/kcosmeticItems';
 import { koreanCosmeticItems } from '@/constants/koreanCosmeticItems';
 import { equipmentItems } from '@/constants/equipmentItems';
 
-export type EquipmentItemType = {
-  title: string;
-  image: string;
-  description: string;
-  fullDescription: string;
-};
 
 export default function Home() {
   const [selectedLocation, setSelectedLocation] = useState(locationItems[0]);

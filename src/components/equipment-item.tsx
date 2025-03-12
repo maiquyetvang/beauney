@@ -8,7 +8,8 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer';
 import { Button } from './button';
-import { EquipmentItemType } from '@/app/page';
+import { EquipmentItemType } from '@/types/equipment';
+
 export interface EquipmentItemProps {
   item: EquipmentItemType;
 }

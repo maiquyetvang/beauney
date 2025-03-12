@@ -1,4 +1,4 @@
-import { EquipmentItemType } from '@/app/page';
+import { EquipmentItemType } from '@/types/equipment';
 
 export const equipmentItems: EquipmentItemType[] = [
   {
