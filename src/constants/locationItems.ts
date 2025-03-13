@@ -1,4 +1,3 @@
-
 export const locationItems = [
   {
     title: 'Cheongna',
