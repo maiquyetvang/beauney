@@ -26,6 +26,7 @@ const formSchema = z.object({
   consultationFields: z.array(z.string()).min(1, {
     message: 'Please select at least one consultation field',
   }),
+  otherField: z.string().default(''),
   name: z.string().min(2, {
     message: 'Name must be at least 2 characters',
   }),
@@ -42,6 +43,7 @@ const formSchema = z.object({
 
 export default function Home() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showOtherField, setShowOtherField] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -70,7 +72,12 @@ export default function Home() {
         language: 'vi',
         email: values.email,
         answer: {
-          'Consultation Fields': [...values.consultationFields],
+          'Consultation Fields': [
+            ...values.consultationFields.filter((field) => field !== 'Other'),
+            ...(showOtherField && !!values.otherField
+              ? [`Other: "${values.otherField}"`]
+              : []),
+          ],
           'Phone Number': values.phone,
           Message: values.message,
         },
@@ -141,7 +148,7 @@ export default function Home() {
                                 key={item.id}
                                 className="flex flex-row items-start space-y-0 space-x-3"
                               >
-                                <div className="lg:hover:text-primary-500 active:bg-primary-50 has-checked:bg-primary-50 lg:hover:has-checked:bg-primary-50 has-checked:text-primary-500 flex h-14 w-full cursor-pointer items-center justify-between gap-5 rounded-lg bg-[#F7F8FA] px-6 font-medium has-checked:font-medium">
+                                <div className="lg:hover:text-primary-500 active:bg-primary-50 has-checked:bg-primary-50 lg:hover:has-checked:bg-primary-50 has-checked:text-primary-500 flex h-14 w-full cursor-pointer items-center justify-between gap-5 rounded-sm bg-[#F7F8FA] px-6 font-medium has-checked:font-medium">
                                   <div className="h-full flex-1">
                                     <FormLabel
                                       htmlFor={item.id}
@@ -153,16 +160,23 @@ export default function Home() {
                                   <FormControl>
                                     <Checkbox
                                       id={item.id}
-                                      checked={field.value?.includes(item.id)}
+                                      checked={field.value?.includes(
+                                        item.field,
+                                      )}
                                       onCheckedChange={(checked) => {
+                                        if (item.field === 'Other') {
+                                          setShowOtherField(
+                                            checked ? true : false,
+                                          );
+                                        }
                                         return checked
                                           ? field.onChange([
                                               ...field.value,
-                                              item.id,
+                                              item.field,
                                             ])
                                           : field.onChange(
                                               field.value?.filter(
-                                                (value) => value !== item.id,
+                                                (value) => value !== item.field,
                                               ),
                                             );
                                       }}
@@ -175,6 +189,26 @@ export default function Home() {
                         />
                       ))}
                     </div>
+                    {showOtherField && (
+                      <FormField
+                        control={form.control}
+                        name="otherField"
+                        render={({ field }) => (
+                          <FormItem className="mt-4 w-full">
+                            <FormLabel>Please specify:</FormLabel>
+                            <FormControl>
+                              <Input
+                                {...field}
+                                value={field.value || ''}
+                                className="border-none bg-[#F7F8FA] text-lg"
+                                placeholder="Enter other consultation field"
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    )}
                     <FormMessage className="mt-2" />
                   </FormItem>
                 )}
@@ -244,7 +278,7 @@ export default function Home() {
                       <FormControl>
                         <Textarea
                           {...field}
-                          className="resize-none border-none bg-[#F7F8FA] text-lg"
+                          className="resize-none rounded-sm border-none bg-[#F7F8FA] text-lg"
                           placeholder="Enter your message"
                         />
                       </FormControl>

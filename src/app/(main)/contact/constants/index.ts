@@ -5,5 +5,5 @@ export const consultField = [
   { field: 'Ultherapy & Thermage Dual Lifting', id: 'ultherapy' },
   { field: 'Skin booster', id: 'skinbooster' },
   { field: 'Hair transplant', id: 'hairtransplant' },
-  { field: 'Other ', id: 'other' },
+  { field: 'Other', id: 'other' },
 ];
