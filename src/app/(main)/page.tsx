@@ -31,7 +31,7 @@ import { specialItems } from '@/constants/specialItems';
 import { kcosmeticItems } from '@/constants/kcosmeticItems';
 import { koreanCosmeticItems } from '@/constants/koreanCosmeticItems';
 import { equipmentItems } from '@/constants/equipmentItems';
-
+import { ROUTES } from '@/constants/routes';
 
 export default function Home() {
   const [selectedLocation, setSelectedLocation] = useState(locationItems[0]);
@@ -131,17 +131,34 @@ export default function Home() {
       </div>
       {/* cosmetic clinic */}
       <div className="flex flex-col items-center justify-center px-[5vw] py-20 lg:py-40">
-        <h2 className="mb-4 text-center lg:mb-8">K-Beauty Cosmetic Clinic</h2>
-        <p className="lg:md-20 mb-10 text-center text-lg lg:w-[50vw]">
+        <span className="mb-4 text-center text-[34px] font-bold lg:mb-8 lg:text-[52px]">
+          K-Beauty Cosmetic Clinic
+        </span>
+        <p className="lg:md-20 text-16 mb-10 text-center lg:w-[50vw] lg:text-xl">
           At K-Beauty Cosmetic Clinic, we offer advanced skin whitening,
           lifting, laser therapy, Botox, fillers, and hair transplants,
           delivering natural, personalized results with cutting-edge techniques.
         </p>
-        <h3 className="text-primary-500 mb-10 lg:mb-20">Skin Health News</h3>
+        <h3 className="text-primary-500 text-30 lg:text-40 mb-10 lg:mb-20">
+          Skin Health News
+        </h3>
         <div className="flex w-full grid-flow-row grid-cols-3 flex-col gap-10 lg:grid lg:gap-20">
-          {kcosmeticItems.map((item) => (
+          {kcosmeticItems.slice(0, 3).map((item) => (
             <div
               className="transition-all ease-in-out lg:hover:shadow-lg"
+              key={item.image}
+            >
+              <KCosmeticItem
+                title={item.title}
+                image={item.image}
+                description={item.description}
+                url={item.url}
+              />
+            </div>
+          ))}{' '}
+          {kcosmeticItems.slice(3, 6).map((item) => (
+            <div
+              className="transition-all ease-in-out max-lg:hidden lg:hover:shadow-lg"
               key={item.image}
             >
               <KCosmeticItem
@@ -154,7 +171,7 @@ export default function Home() {
           ))}
           {/* learn more btn */}
           <div className="col-span-3 flex items-center justify-center">
-            <a href="#" className="w-full lg:w-fit">
+            <a href={ROUTES.TREATMENT} className="w-full lg:w-fit">
               <Button className="w-full lg:w-96" variant="outline">
                 LEARN MORE
               </Button>
@@ -164,16 +181,20 @@ export default function Home() {
       </div>
       {/* contact us */}
       <div className="relative flex min-h-[400px] flex-col items-center justify-between gap-0 bg-[#D590E3] px-[5vw] pt-16 lg:flex-row lg:gap-[5vw] lg:px-0 lg:py-0 lg:pt-0 lg:pl-[10vw]">
-        <div className="relative z-10 py-5 text-white lg:pr-80">
-          <h2 className="mb-5 text-4xl font-bold">
-            Any Questions? Contact Us!
-          </h2>
-          <p className="mb-8 text-lg">
+        <div className="relative z-10 grid gap-8 py-5 text-white lg:gap-5 lg:pr-80">
+          <span className="text-[34px] leading-11 font-bold lg:text-[80px] lg:leading-24">
+            Any Questions?
+            <br /> Contact Us!
+          </span>
+          <p className="mb-8 text-lg lg:text-[26px]">
             HUMAN CHEONGNA offers safe and professional cosmetic treatments. If
             you have any questions or would like a consultation, feel free to
             contact us! We&apos;ll assist you quickly and professionally.
           </p>
-          <a href="/contact" className="w-full lg:w-fit">
+          <a
+            href={ROUTES.CONTACT}
+            className="!mt-auto hidden w-full lg:block lg:w-fit"
+          >
             <Button className="w-full rounded-none bg-white font-medium text-black hover:bg-white/90 lg:w-fit lg:min-w-52">
               Contact Us
             </Button>
@@ -193,6 +214,14 @@ export default function Home() {
             className="h-full w-auto object-cover object-bottom"
           />
         </div>
+        <a
+          href={ROUTES.CONTACT}
+          className="absolute bottom-5 left-10 !mt-auto w-[30vw] pb-5 lg:hidden"
+        >
+          <Button className="text-primary w-full rounded-none bg-white font-medium hover:bg-white/90 lg:w-fit lg:min-w-52">
+            Contact Us
+          </Button>
+        </a>
       </div>
       {/* k cosmetic & FAQ  */}
       <div className="flex flex-col items-center justify-center bg-[#F7F8FA] px-[5vw] py-20 lg:py-40">
@@ -295,7 +324,7 @@ export default function Home() {
 
           {/* learn more btn */}
           <div className="col-span-3 flex items-center justify-center">
-            <a href="#" className="w-full lg:w-fit">
+            <a href={ROUTES.TREATMENT} className="w-full lg:w-fit">
               <Button className="w-full lg:w-96" variant="outline">
                 LEARN MORE
               </Button>

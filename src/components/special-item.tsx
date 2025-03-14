@@ -27,7 +27,7 @@ export const SpecialItem = ({
       >
         <img src={image} alt="" className="aspect-square lg:w-96" />
         <div className="flex h-full flex-1 flex-col justify-start bg-white p-5 select-none lg:h-96 lg:justify-center lg:px-[60px] lg:py-0">
-          <h3>{title}</h3>
+          <span className="text-2xl font-bold lg:text-3xl">{title}</span>
           <p className="mt-2 mb-6 select-none lg:mb-12">{description}</p>
           <ul className="list-disc select-none">
             {cons.map((i) => (
