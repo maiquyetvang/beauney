@@ -35,11 +35,6 @@ export const ChatButton = () => {
     };
   }, [chatInitialized]);
 
-  const handleChatButtonClick = () => {
-    if (window.ChatWidget) {
-      window.ChatWidget.open();
-    }
-  };
   return (
     <div
       className={cn(
