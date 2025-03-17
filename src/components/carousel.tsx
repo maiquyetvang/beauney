@@ -115,7 +115,7 @@ export default function CarouselHomePage() {
           ))}
         </div>
       </div>
-      <div className="absolute inset-0 flex flex-col justify-end p-12 lg:p-16 lg:pb-16 lg:pl-60">
+      <div className="pointer-events-none absolute right-0 bottom-0 left-0 flex flex-col justify-end p-12 lg:p-16 lg:pb-16 lg:pl-60">
         <div className="mb-16">
           <>
             {/* desktop */}
