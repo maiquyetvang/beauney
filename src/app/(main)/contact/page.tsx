@@ -36,9 +36,7 @@ const formSchema = z.object({
   email: z.string().email({
     message: 'Please enter a valid email address',
   }),
-  message: z.string().min(10, {
-    message: 'Message must be at least 10 characters',
-  }),
+  message: z.string().default(''),
 });
 
 export default function Home() {
@@ -77,7 +75,7 @@ export default function Home() {
             ...(showOtherField && !!values.otherField
               ? [`Other: "${values.otherField}"`]
               : []),
-          ],
+          ].join(', '),
           'Phone Number': values.phone,
           Message: values.message,
         },
@@ -91,9 +89,10 @@ export default function Home() {
       });
 
       form.reset();
-    } catch (error) {
+      setShowOtherField(false);
+    } catch (error: any) {
       console.log(error);
-      toast.error('Something went wrong', {
+      toast.error(error?.message || 'Something went wrong', {
         description: 'Please try again later',
       });
     } finally {
@@ -194,7 +193,7 @@ export default function Home() {
                         control={form.control}
                         name="otherField"
                         render={({ field }) => (
-                          <FormItem className="mt-4 w-full">
+                          <FormItem className={`"mt-4 " w-full`}>
                             <FormLabel>Please specify:</FormLabel>
                             <FormControl>
                               <Input
@@ -288,12 +287,19 @@ export default function Home() {
                 />
               </div>
             </div>
-            <div className="flex items-center justify-center">
+            <div
+              className="flex items-center justify-center"
+              onClick={() => {
+                console.log(form.getValues().otherField);
+              }}
+            >
               <Button
                 type="submit"
                 variant="primary"
                 className="mt-10 w-full lg:w-[400px]"
-                disabled={isSubmitting}
+                disabled={
+                  isSubmitting || (showOtherField && !form.watch('otherField'))
+                }
               >
                 {isSubmitting ? 'Sending...' : 'Send'}
               </Button>
