@@ -43,11 +43,11 @@ export const ChatButton = () => {
   return (
     <div
       className={cn(
-        'fixed right-6 bottom-24 flex flex-col items-end gap-3',
-        !chatInitialized && 'bottom-6',
+        'fixed right-6 bottom-[106px] flex flex-col items-end gap-5',
+        !chatInitialized && 'bottom-5',
       )}
     >
-      {showLabel && (
+      {showLabel && chatInitialized && (
         <div className="relative rounded-2xl border border-black/10 bg-white px-3 py-2 shadow-lg">
           <div className="flex items-center gap-1">
             <p>
@@ -63,14 +63,6 @@ export const ChatButton = () => {
             <XIcon className="size-3 shrink-0" />
           </button>
         </div>
-      )}
-      {!chatInitialized && (
-        <button
-          onClick={handleChatButtonClick}
-          className="rounded-full border border-black/10 bg-white/50 p-3 shadow-lg backdrop-blur-lg"
-        >
-          <img src="/chat-buble.svg" alt="" className="size-12" />
-        </button>
       )}
     </div>
   );
