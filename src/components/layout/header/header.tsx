@@ -38,8 +38,11 @@ export const Header = () => {
       )}
     >
       <div className="w-[52px] lg:hidden"></div>
-      <Link href="/" className="mx-auto shrink-0 lg:m-0">
+      <Link href="/" className="mx-auto hidden shrink-0 md:block lg:m-0">
         <img src="/logo.svg" alt="logo" />
+      </Link>
+      <Link href="/" className="mx-auto block shrink-0 md:hidden lg:m-0">
+        <img src="/logo-reverse.svg" alt="logo" />
       </Link>
       {/* navigation item */}
       <HeaderNavigation />
